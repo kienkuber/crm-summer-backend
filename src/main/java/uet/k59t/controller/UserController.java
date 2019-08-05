@@ -2,8 +2,7 @@ package uet.k59t.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import uet.k59t.controller.dto.UserDTO;
-import uet.k59t.model.User;
+import uet.k59t.dto.UserDto;
 import uet.k59t.service.UserService;
 
 /**
@@ -16,13 +15,13 @@ public class UserController {
 
     //create User
     @RequestMapping(value = "user", method = RequestMethod.POST)
-    public UserDTO createUser(@RequestBody UserDTO userDTO){
-        return userService.createUser(userDTO);
+    public UserDto createUser(@RequestBody UserDto userDto){
+        return userService.createUser(userDto);
     }
 
     //find User by id
     @RequestMapping(value = "getuser", method = RequestMethod.GET)
-    public UserDTO findUser(@PathVariable("user_id") Long id){
+    public UserDto findUser(@PathVariable("user_id") Long id){
         return userService.getUserById(id);
     }
 }

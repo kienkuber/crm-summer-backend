@@ -15,11 +15,24 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Setter
 @Getter
-public class User {
+public class Opportunity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String userName;
-    private String password;
-    private String token;
+
+    private boolean isDeleted;
+
+    private Long accountId;
+
+    private String name;
+
+    private String stageName;
+
+    private boolean isClosed;
+
+    private boolean isWon;
+
+    private Long contactId;
+
+    private Long contractId;
 }

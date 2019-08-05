@@ -9,17 +9,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Timestamp;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
-public class User {
+public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String userName;
-    private String password;
-    private String token;
+
+    private Long accountId;
+
+    private String subject;
+
+    private Timestamp activityDateTime;
+
+    private Long durationInMinute;
+
+    private String description;
 }

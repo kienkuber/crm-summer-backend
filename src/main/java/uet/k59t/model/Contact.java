@@ -15,11 +15,8 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Setter
 @Getter
-public class User {
+public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String userName;
-    private String password;
-    private String token;
 }

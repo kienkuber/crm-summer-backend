@@ -15,11 +15,18 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Setter
 @Getter
-public class User {
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String userName;
-    private String password;
-    private String token;
+
+    private boolean isDeleted;
+
+    private String firstName;
+
+    private String lastName;
+
+    private String company;
+
+    private String email;
 }

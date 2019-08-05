@@ -1,9 +1,6 @@
-package uet.k59t.controller.dto;
+package uet.k59t.dto;
 
-/**
- * Created by Long on 11/21/2016.
- */
-public class UserDTO {
+public class UserDto {
     private String userName;
     private String password;
 
