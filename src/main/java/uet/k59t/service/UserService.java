@@ -9,6 +9,7 @@ import uet.k59t.dto.UserDto;
 import uet.k59t.model.User;
 import uet.k59t.repository.UserRepository;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -49,5 +50,18 @@ public class UserService {
                     new Error()
             );
         }
+    }
+
+    public UserDto login(UserDto userDto) {
+        User user = userRepository.findByUserName(userDto.getUserName());
+        if(Objects.nonNull(user) && user.getPassword().equals(userDto.getPassword())) {
+            return userDto;
+        }
+
+        throw new ResponseStatusException(
+                HttpStatus.UNAUTHORIZED,
+                "Wrong username or password",
+                new Error()
+                );
     }
 }

@@ -17,7 +17,7 @@ public class Lead {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private boolean isDeleted;
+    private boolean deleted;
 
     private String firstName;
 
@@ -31,5 +31,5 @@ public class Lead {
 
     private int status;
 
-    private boolean isConverted;
+    private boolean converted;
 }
