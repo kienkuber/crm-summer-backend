@@ -7,8 +7,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import uet.k59t.dto.AccountDto;
 import uet.k59t.dto.LeadDto;
 import uet.k59t.dto.LeadRequestDto;
+import uet.k59t.model.Account;
 import uet.k59t.model.Lead;
 import uet.k59t.repository.LeadRepository;
 
@@ -19,6 +21,9 @@ public class LeadService {
     LeadRepository leadRepository;
 
     @Autowired
+    AccountService accountService;
+
+    @Autowired
     ModelMapper modelMapper;
 
     public Page<LeadDto> findAllLead(Pageable pageable) {
@@ -27,13 +32,7 @@ public class LeadService {
     }
 
     public LeadDto findById(Long id) {
-        Lead lead = leadRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Id not found", new Error())
-        );
-        if (lead.isDeleted()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Id not found", new Error());
-        }
-        return modelMapper.map(lead, LeadDto.class);
+        return modelMapper.map(findExistedLead(id), LeadDto.class);
     }
 
     public void deleteById(Long id) {
@@ -49,12 +48,25 @@ public class LeadService {
     }
 
     public void updateLead(LeadRequestDto leadRequestDto, Long id) {
+        Lead lead = findExistedLead(id);
+        modelMapper.map(leadRequestDto, lead);
+        leadRepository.save(lead);
+    }
+
+    public AccountDto convertLead(Long id) {
+        Lead lead = findExistedLead(id);
+        lead.setConverted(true);
+        Account account = accountService.createNewAccount(lead);
+        AccountDto accountDto = modelMapper.map(account, AccountDto.class);
+        return accountDto;
+    }
+
+    private Lead findExistedLead(Long id) {
         Lead lead = leadRepository.findById(id).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Id not found", new Error()));
         if (lead.isDeleted()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Id not found", new Error());
         }
-        modelMapper.map(leadRequestDto, lead);
-        leadRepository.save(lead);
+        return lead;
     }
 }
