@@ -47,4 +47,9 @@ public class LeadController {
         leadService.updateLead(leadRequestDto, id);
         return ResponseEntity.ok().build();
     }
+
+    @PutMapping("/convert/{id}")
+    public ResponseEntity<?> convertLead(@PathVariable @NotNull Long id) {
+        return ResponseEntity.ok(leadService.convertLead(id));
+    }
 }
