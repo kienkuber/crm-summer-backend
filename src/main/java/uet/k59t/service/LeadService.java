@@ -27,6 +27,7 @@ public class LeadService {
     ModelMapper modelMapper;
 
     public Page<LeadDto> findAllLead(Pageable pageable) {
+        //nó sẽ tiếp tục đến tầng service để xử lý logic. Bên trong service sẽ sử dụng repository để lấy data, transform và return về cho controller
         Page<Lead> leadPage =leadRepository.findAllByDeletedIsFalse(pageable);
         return leadPage.map(e -> modelMapper.map(e, LeadDto.class));
     }

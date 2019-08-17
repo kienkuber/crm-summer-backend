@@ -17,15 +17,7 @@ import java.sql.Timestamp;
 @Setter
 @Getter
 public class Event {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
-    private Long accountId;
-
-    private String subject;
-
-    private Timestamp activityDateTime;
 
     private Long durationInMinute;
 

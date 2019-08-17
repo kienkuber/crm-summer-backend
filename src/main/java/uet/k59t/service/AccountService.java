@@ -14,11 +14,6 @@ public class AccountService {
     @Autowired
     AccountRepository accountRepository;
 
-    public Account createNewAccount(Lead lead) {
-        Account account = new Account();
-        account.setDeleted(false);
-        account.setLead(lead);
-        accountRepository.save(account);
         return accountRepository.getAccountByDeletedAndLead(false, lead)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Id not found", new Error()));
     }
