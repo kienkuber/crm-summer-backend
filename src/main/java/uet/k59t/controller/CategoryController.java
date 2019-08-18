@@ -20,7 +20,7 @@ public class CategoryController {
     CategoryService categoryService;
 
     @GetMapping
-    public ResponseEntity<?> getAllProducts(@SortDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+    public ResponseEntity<?> getAllCategory(@SortDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         return ResponseEntity.ok(categoryService.findAllCategory(pageable));
     }
 
@@ -30,7 +30,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createLead(@RequestBody @Valid CategoryRequestDto categoryRequestDto) {
+    public ResponseEntity<?> createCategory(@RequestBody @Valid CategoryRequestDto categoryRequestDto) {
         categoryService.createNewCategory(categoryRequestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
