@@ -17,7 +17,6 @@ import javax.persistence.Id;
 @Getter
 public class Invoice {
 
-    //comment 2
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

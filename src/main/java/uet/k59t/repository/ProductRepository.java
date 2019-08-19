@@ -8,6 +8,6 @@ import uet.k59t.model.Product;
 import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    Page<Product> findAllByDeletedIsFalse(Pageable pageable);
+    Page<Product> findAll(Pageable pageable);
     Optional<Product> findById(Long id);
 }

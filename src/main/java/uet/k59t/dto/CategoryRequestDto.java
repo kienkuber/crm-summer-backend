@@ -10,5 +10,5 @@ public class CategoryRequestDto {
     private String name;
 
     @NotBlank
-    private int description;
+    private String description;
 }

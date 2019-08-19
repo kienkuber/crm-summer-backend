@@ -28,13 +28,19 @@ public class ProductService {
     ModelMapper modelMapper;
 
     public Page<ProductDto> findAllProduct(Pageable pageable) {
-        Page<Product> leadPage = productRepository.findAllByDeletedIsFalse(pageable);
-        return leadPage.map(e -> modelMapper.map(e, ProductDto.class));
+        Page<Product> leadPage = productRepository.findAll(pageable);
+        return leadPage.map(e -> {
+            ProductDto productDto = modelMapper.map(e, ProductDto.class);
+            productDto.setCategoryId(e.getCategory().getId());
+            return productDto;
+        });
     }
 
-    //COmment///////////
     public ProductDto findById(Long id) {
-        return modelMapper.map(findExistedProduct(id), ProductDto.class);
+        Product product = findExistedProduct(id);
+        ProductDto productDto = modelMapper.map(product, ProductDto.class);
+        productDto.setCategoryId(product.getCategory().getId());
+        return productDto;
     }
 
     public void deleteById(Long id) {

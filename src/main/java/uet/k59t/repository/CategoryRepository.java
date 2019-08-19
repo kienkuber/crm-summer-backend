@@ -8,6 +8,6 @@ import uet.k59t.model.Category;
 import java.util.Optional;
 
 public interface CategoryRepository extends JpaRepository<Category, Long>{
-    Page<Category> findAllByDeletedIsFalse(Pageable pageable);
+    Page<Category> findAll(Pageable pageable);
     Optional<Category> findById(Long id);
 }

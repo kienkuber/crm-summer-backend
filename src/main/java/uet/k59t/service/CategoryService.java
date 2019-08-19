@@ -26,11 +26,10 @@ public class CategoryService {
     ModelMapper modelMapper;
 
     public Page<CategoryDto> findAllCategory(Pageable pageable) {
-        Page<Category> leadPage = categoryRepository.findAllByDeletedIsFalse(pageable);
+        Page<Category> leadPage = categoryRepository.findAll(pageable);
         return leadPage.map(e -> modelMapper.map(e, CategoryDto.class));
     }
 
-    //COmment///////////
     public CategoryDto findById(Long id) {
         return modelMapper.map(findExistedCategory(id), CategoryDto.class);
     }
