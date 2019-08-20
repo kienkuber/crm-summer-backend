@@ -15,9 +15,12 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Setter
 @Getter
-public class Invoice {
-
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    private String name;
+
+    private String description;
 }
