@@ -18,7 +18,7 @@ public class LeadDto {
 
     private String source;
 
-    private int status;
+    private Boolean qualified;
 
     private boolean converted;
 }

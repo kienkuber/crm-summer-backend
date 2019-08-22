@@ -14,6 +14,8 @@ import uet.k59t.model.Account;
 import uet.k59t.model.Lead;
 import uet.k59t.repository.LeadRepository;
 
+import java.util.Objects;
+
 @Service
 public class LeadService {
 
@@ -43,7 +45,7 @@ public class LeadService {
         Lead lead = modelMapper.map(leadDto, Lead.class);
         lead.setDeleted(false);
         lead.setConverted(false);
-        lead.setStatus(0);
+        lead.setQualified(null);
         leadRepository.save(lead);
     }
 
@@ -55,10 +57,15 @@ public class LeadService {
 
     public AccountDto convertLead(Long id) {
         Lead lead = findExistedLead(id);
+        if (Objects.isNull(lead.getQualified())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Lead cannot be converted", new Error());
+        }
+        if (!lead.getQualified()) {
+            deleteById(id);
+            return null;
+        }
         lead.setConverted(true);
-        Account account = accountService.createNewAccount(lead);
-        AccountDto accountDto = modelMapper.map(account, AccountDto.class);
-        return accountDto;
+        return accountService.createNewAccount(lead);
     }
 
     private Lead findExistedLead(Long id) {

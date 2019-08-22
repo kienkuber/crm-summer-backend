@@ -29,7 +29,7 @@ public class Lead {
 
     private String source;
 
-    private int status;
+    private Boolean qualified;
 
     private boolean converted;
 }
