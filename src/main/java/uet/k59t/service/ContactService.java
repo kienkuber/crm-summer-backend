@@ -63,4 +63,9 @@ public class ContactService {
         modelMapper.map(contactRequestDto, contact);
         contactRepository.save(contact);
     }
+
+    Contact findByAccountId(Long accountId) {
+        return contactRepository.findByAccountId(accountId).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Id not found", new Error()));
+    }
 }

@@ -43,7 +43,7 @@ public class LeadController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody @Valid LeadRequestDto leadRequestDto, @PathVariable Long id) {
+    public ResponseEntity<?> update(@RequestBody LeadRequestDto leadRequestDto, @PathVariable Long id) {
         leadService.updateLead(leadRequestDto, id);
         return ResponseEntity.ok().build();
     }
