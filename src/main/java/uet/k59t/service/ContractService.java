@@ -68,4 +68,8 @@ public class ContractService {
         modelMapper.map(contractRequestDto, contract);
         contractRepository.save(contract);
     }
+
+    public Contract findContract(Long id) {
+        return contractRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Id not found", new Error()));
+    }
 }
