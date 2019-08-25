@@ -28,7 +28,7 @@ public class ContractService {
     ModelMapper modelMapper;
 
     public Page<ContractDto> findAllContract(Pageable pageable) {
-        Page<Contract> leadPage = contractRepository.findAll(pageable);
+        Page<Contract> leadPage = contractRepository.findAllByDeletedIsFalse(pageable);
         return leadPage.map(e -> {
             ContractDto contractDto = modelMapper.map(e, ContractDto.class);
             contractDto.setAccountId(e.getAccount().getId());
@@ -37,9 +37,8 @@ public class ContractService {
     }
 
     private Contract findExistedContract(Long id) {
-        Contract contract = contractRepository.findById(id).orElseThrow(() ->
+        return contractRepository.findById(id).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Id not found", new Error()));
-        return contract;
     }
 
     public ContractDto findById(Long id) {

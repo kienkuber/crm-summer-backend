@@ -12,8 +12,6 @@ public class ContractDto {
 
     private Long accountId;
 
-    private Long ownerId;
-
     private Date startDate;
 
     private String status;

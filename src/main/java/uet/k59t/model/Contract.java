@@ -24,8 +24,6 @@ public class Contract {
     @JoinColumn(name = "accountId")
     private Account account;
 
-    private Long ownerId;
-
     private Date startDate;
 
     private String status;
