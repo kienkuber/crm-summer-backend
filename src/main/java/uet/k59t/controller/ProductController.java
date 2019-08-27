@@ -29,7 +29,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.findById(id));
     }
 
-    @PostMapping("/{category_id}")
+    @PostMapping("/{categoryId}")
     public ResponseEntity<?> createProduct(@RequestBody @Valid ProductRequestDto productRequestDto, @PathVariable @NotNull Long categoryId) {
         productService.createNewProduct(productRequestDto, categoryId);
         return new ResponseEntity<>(HttpStatus.CREATED);

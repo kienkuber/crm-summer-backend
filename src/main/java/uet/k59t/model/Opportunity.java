@@ -5,13 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
@@ -22,7 +18,9 @@ public class Opportunity {
 
     private boolean deleted;
 
-    private Long accountId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     private String name;
 
@@ -32,7 +30,17 @@ public class Opportunity {
 
     private boolean isWon;
 
-    private Long contactId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "contact_id")
+    private Contact contact;
 
-    private Long contractId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "contract_id")
+    private Contract contract;
+
+    public Opportunity() {
+        this.deleted = false;
+        this.isClosed = false;
+        this.isWon = false;
+    }
 }
