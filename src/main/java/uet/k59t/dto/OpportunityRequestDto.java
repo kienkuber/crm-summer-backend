@@ -18,6 +18,8 @@ public class OpportunityRequestDto {
     @NotBlank
     private String stageName;
 
+    private Long contractId;
+
     private boolean isClosed;
 
     private boolean isWon;

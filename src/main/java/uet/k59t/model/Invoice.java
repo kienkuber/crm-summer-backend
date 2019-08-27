@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -27,4 +29,7 @@ public class Invoice {
     private float paymentAmount;
 
     private Date paymentDate;
+
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL)
+    private Set<InvoiceProduct> invoiceProduct;
 }

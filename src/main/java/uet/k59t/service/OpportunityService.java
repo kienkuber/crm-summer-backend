@@ -7,8 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import uet.k59t.dto.ContactDto;
+import uet.k59t.dto.ContractDto;
 import uet.k59t.dto.OpportunityDto;
 import uet.k59t.dto.OpportunityRequestDto;
+import uet.k59t.model.Contract;
 import uet.k59t.model.Opportunity;
 import uet.k59t.repository.OpportunityRepository;
 
@@ -22,6 +24,9 @@ public class OpportunityService {
 
     @Autowired
     private ContactService contactService;
+
+    @Autowired
+    private ContractService contractService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -41,7 +46,7 @@ public class OpportunityService {
         OpportunityDto opportunityDto = modelMapper.map(opportunity, OpportunityDto.class);
         opportunityDto.setAccountDto(accountService.convertAccount(opportunity.getAccount()));
         opportunityDto.setContactDto(modelMapper.map(opportunity.getContact(), ContactDto.class));
-        //TODO: SET contractDTO
+        opportunityDto.setContractDto(modelMapper.map(opportunity.getContract(), ContractDto.class));
         return opportunityDto;
     }
 
@@ -51,7 +56,6 @@ public class OpportunityService {
         opportunity.setName(opportunityDto.getName());
         opportunity.setStageName(opportunityDto.getStageName());
         opportunity.setContact(contactService.findByAccountId(opportunityDto.getAccountId()));
-        //TODO: SET contract
         opportunityRepository.save(opportunity);
     }
 
@@ -59,6 +63,7 @@ public class OpportunityService {
         Opportunity opportunity = opportunityRepository.findByDeletedIsFalseAndId(id).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Id not found", new Error()));
         modelMapper.map(opportunityDto, opportunity);
+        opportunity.setContract(contractService.findContract(opportunityDto.getContractId()));
         opportunityRepository.save(opportunity);
     }
 

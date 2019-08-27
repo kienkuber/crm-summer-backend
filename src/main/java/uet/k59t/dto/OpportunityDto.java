@@ -20,5 +20,5 @@ public class OpportunityDto {
 
     private ContactDto contactDto;
 
-    private Long contractId;
+    private ContractDto contractDto;
 }

@@ -38,6 +38,10 @@ public class ProductService {
 
     public ProductDto findById(Long id) {
         Product product = findExistedProduct(id);
+        return convertToDto(product);
+    }
+
+    public ProductDto convertToDto(Product product) {
         ProductDto productDto = modelMapper.map(product, ProductDto.class);
         productDto.setCategoryId(product.getCategory().getId());
         return productDto;
@@ -59,7 +63,7 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    private Product findExistedProduct(Long id) {
+    public Product findExistedProduct(Long id) {
         Product product = productRepository.findById(id).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Id not found", new Error()));
         return product;
