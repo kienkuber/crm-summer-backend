@@ -21,7 +21,7 @@ public class OpportunityController {
 
     @GetMapping("/all/{accountId}")
     public ResponseEntity<?> getOpportunityByAccountId(@SortDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable, @PathVariable @NotNull Long accountId) {
-        return ResponseEntity.ok(opportunityService.findAllByAccountId(accountId));
+        return ResponseEntity.ok(opportunityService.findAllByAccountId(accountId, pageable));
     }
 
     @GetMapping("/{id}")
