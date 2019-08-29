@@ -3,6 +3,7 @@ package uet.k59t.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -23,8 +24,8 @@ public class EventService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public Page<EventDto> findAllByAccountId(Long accountId) {
-        return eventRepository.findAllByAccountId(accountId).map(this::convertToDto);
+    public Page<EventDto> findAllByAccountId(Long accountId, Pageable pageable) {
+        return eventRepository.findAllByAccountId(accountId, pageable).map(this::convertToDto);
     }
 
     public EventDto findById(Long id) {
