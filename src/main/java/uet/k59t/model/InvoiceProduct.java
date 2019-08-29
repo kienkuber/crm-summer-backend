@@ -12,7 +12,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Setter
 @Getter
-public class InvoiceProduct {
+public class InvoiceProduct {  
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "invoice_id")
     private Invoice invoice;
