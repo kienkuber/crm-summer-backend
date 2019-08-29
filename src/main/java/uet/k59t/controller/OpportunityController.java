@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uet.k59t.dto.OpportunityRequestDto;
 import uet.k59t.service.OpportunityService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -18,7 +20,7 @@ public class OpportunityController {
     private OpportunityService opportunityService;
 
     @GetMapping("/all/{accountId}")
-    public ResponseEntity<?> getOpportunityByAccountId(@PathVariable @NotNull Long accountId) {
+    public ResponseEntity<?> getOpportunityByAccountId(@SortDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable, @PathVariable @NotNull Long accountId) {
         return ResponseEntity.ok(opportunityService.findAllByAccountId(accountId));
     }
 
