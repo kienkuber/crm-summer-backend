@@ -8,6 +8,8 @@ import uet.k59t.dto.EventRequestDto;
 import uet.k59t.service.EventService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.SortDefault;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
