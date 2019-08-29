@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uet.k59t.dto.EventRequestDto;
 import uet.k59t.service.EventService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -18,8 +20,8 @@ public class EventController {
     private EventService eventService;
 
     @GetMapping("/all/{accountId}")
-    public ResponseEntity<?> findAllByAccountId(@PathVariable @NotNull Long accountId) {
-        return ResponseEntity.ok(eventService.findAllByAccountId(accountId));
+    public ResponseEntity<?> findAllByAccountId(@SortDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable, @PathVariable @NotNull Long accountId) {
+        return ResponseEntity.ok(eventService.findAllByAccountId(accountId, pageable));
     }
 
     @GetMapping("/{id}")
