@@ -3,6 +3,7 @@ package uet.k59t.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -31,9 +32,9 @@ public class OpportunityService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public Page<OpportunityDto> findAllByAccountId(Long accountId) {
+    public Page<OpportunityDto> findAllByAccountId(Long accountId, Pageable pageable) {
         accountService.findAccount(accountId);
-        return opportunityRepository.findAllByDeletedIsFalseAndAccountId(accountId)
+        return opportunityRepository.findAllByDeletedIsFalseAndAccountId(accountId, pageable)
                 .map(e -> modelMapper.map(e, OpportunityDto.class));
     }
 
