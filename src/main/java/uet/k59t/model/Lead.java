@@ -31,5 +31,7 @@ public class Lead {
 
     private Boolean qualified;
 
+    private int status;
+
     private boolean converted;
 }

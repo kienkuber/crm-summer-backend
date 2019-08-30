@@ -46,6 +46,7 @@ public class LeadService {
         lead.setDeleted(false);
         lead.setConverted(false);
         lead.setQualified(null);
+        lead.setStatus(0);
         leadRepository.save(lead);
     }
 
