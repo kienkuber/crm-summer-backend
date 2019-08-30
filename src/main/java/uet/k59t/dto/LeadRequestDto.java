@@ -17,5 +17,7 @@ public class LeadRequestDto {
     @NotBlank
     private String email;
 
+    private Boolean qualified;
+
     private String source;
 }
